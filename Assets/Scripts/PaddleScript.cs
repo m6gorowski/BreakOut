@@ -14,6 +14,12 @@ public class PaddleScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+    public void ResetPaddle()
+    {
+        this.transform.position = new Vector2(0f, this.transform.position.y);
+        this.rb.velocity = Vector2.zero;
+
+    }
 
     private void Update()
     {

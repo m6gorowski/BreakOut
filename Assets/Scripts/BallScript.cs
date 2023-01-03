@@ -14,7 +14,7 @@ public class BallScript : MonoBehaviour
 
     private void Start()
     {
-        Invoke(nameof(SetRandomTrajectory), 1f);
+        ResetBall();
     }
     private void FixedUpdate()
     {
@@ -26,5 +26,12 @@ public class BallScript : MonoBehaviour
         force.x = Random.Range(-1f, 1f);
         force.y = -1f;
         this.rb.AddForce(force.normalized * this._speed);
+    }
+    public void ResetBall()
+    {
+        this.transform.position = Vector2.zero;
+        this.rb.velocity = Vector2.zero;
+
+        Invoke(nameof(SetRandomTrajectory), 1f);
     }
 }

@@ -7,9 +7,9 @@ public class BrickScript : MonoBehaviour
     [SerializeField]
     private Color[] _states;
     public int health { get; private set; }
+    public int points = 10;
     public SpriteRenderer SpriteRenderer { get; private set; }
-    [SerializeField]
-    private bool unbreakable;
+    public bool unbreakable;
     private void Awake()
     {
         this.SpriteRenderer = GetComponent<SpriteRenderer>();
@@ -39,6 +39,7 @@ public class BrickScript : MonoBehaviour
         {
             this.SpriteRenderer.color = this._states[health - 1];
         }
+        FindObjectOfType<GameManagerScript>().Hit(this);
     }
     private void OnCollisionEnter2D(Collision2D other)
     {

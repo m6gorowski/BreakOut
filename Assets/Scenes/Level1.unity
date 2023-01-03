@@ -631,8 +631,9 @@ GameObject:
   m_Component:
   - component: {fileID: 434229151}
   - component: {fileID: 434229152}
+  - component: {fileID: 434229153}
   m_Layer: 0
-  m_Name: Wall
+  m_Name: DeathZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -678,6 +679,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &434229153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434229150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1409463d314a1fb42a6aba5ae0e5815d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &445744658
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3447,7 +3460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0cd46552b9e9c4ea07461707968c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 30
+  _speed: 35
   maxBounceAngle: 70
 --- !u!50 &2097351420
 Rigidbody2D:
