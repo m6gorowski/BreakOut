@@ -20,6 +20,7 @@ public class BallScript : MonoBehaviour
     {
         rb.velocity = rb.velocity.normalized * _speed;
     }
+    //Sets random trajectory the ball goes into - force.x is left/right, force.y is down, getting a random vector, which is normalised and applied to the ball at the start
     private void SetRandomTrajectory()
     {
         Vector2 force = Vector2.zero;
@@ -27,6 +28,7 @@ public class BallScript : MonoBehaviour
         force.y = -1f;
         this.rb.AddForce(force.normalized * this._speed);
     }
+    //Resets the ball position and velocity and applies the trajectory
     public void ResetBall()
     {
         this.transform.position = Vector2.zero;

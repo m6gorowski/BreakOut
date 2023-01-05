@@ -16,12 +16,16 @@ public class BrickScript : MonoBehaviour
     }
     private void Start()
     {
+        //if the brick isn't unbreakable, it sets it state on the start. The state is the color of the brick
         if (!this.unbreakable)
         {
             this.health = this._states.Length;
             this.SpriteRenderer.color = this._states[health - 1];
         }
     }
+
+    /*Hit function changes the number of lives if the brick is hit and its breakable. It also changes it's state or sets unactive, 
+     * based on the number of remaining lives. It also changes the score in the gamemanager. */
     private void Hit() 
     {
         if (unbreakable)
