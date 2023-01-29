@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
+    //This part is for testing only!
+    [SerializeField]
+    private int _startingLevel = 1;
+
     public int level = 1;
     public int lives = 3;
     public int score = 0;
@@ -30,7 +34,7 @@ public class GameManagerScript : MonoBehaviour
         //Restarts the game
         this.score = 0;
         this.lives = 3;
-        LoadLevel(1);
+        LoadLevel(_startingLevel);
     }
     public void LoadLevel(int level)
     {
