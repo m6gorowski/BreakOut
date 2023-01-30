@@ -27,14 +27,14 @@ public class GameManagerScript : MonoBehaviour
     }
     private void Start()
     {
-        NewGame();
+        //NewGame();
     }
-    private void NewGame()
+    public void NewGame()
     {
         //Restarts the game
         this.score = 0;
         this.lives = 3;
-        LoadLevel(_startingLevel);
+        LoadLevel(1);
     }
     public void LoadLevel(int level)
     {
