@@ -6,6 +6,10 @@ public class BrickScript : MonoBehaviour
 {
     [SerializeField]
     private Color[] _states;
+
+    //is a number between 0 and 1, if it is 0.42, it means that there is 42% probability of dropping a powerUp when hit
+    [SerializeField, Range(0f, 1f)]
+    private float _powerUpProbability;
     public int health { get; private set; }
     public int points = 10;
     public SpriteRenderer SpriteRenderer { get; private set; }
@@ -37,6 +41,7 @@ public class BrickScript : MonoBehaviour
 
         if(this.health <= 0)
         {
+            PowerUpDrop();
             this.gameObject.SetActive(false);
         }
         else
@@ -44,6 +49,14 @@ public class BrickScript : MonoBehaviour
             this.SpriteRenderer.color = this._states[health - 1];
         }
         FindObjectOfType<GameManagerScript>().Hit(this);
+    }
+
+    private void PowerUpDrop()
+    {
+        if ( Random.Range(0f, 1f) <= this._powerUpProbability) 
+        {
+            FindObjectOfType<GameManagerScript>().SpawnPowerUp(this.transform.position);
+        }
     }
     private void OnCollisionEnter2D(Collision2D other)
     {

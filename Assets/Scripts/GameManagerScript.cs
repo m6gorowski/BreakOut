@@ -15,6 +15,10 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField]
     private int _maxLevelAmount = 5;
 
+    //0 - TripleBallPowerUp
+    [SerializeField]
+    private GameObject[] PowerUps;
+
     public BallScript ball { get; private set; }
     public PaddleScript paddle { get; private set; }
     public BrickScript[] bricks { get; private set; }
@@ -68,6 +72,7 @@ public class GameManagerScript : MonoBehaviour
     public void Miss()
     {
         //is called when the ball gets in the DeadZone - makes the number of player lives go down and it either restarts the level or the game
+                
         this.lives--;
         if (this.lives > 0)
         {
@@ -91,8 +96,8 @@ public class GameManagerScript : MonoBehaviour
     }
     private bool ClearedLevel()
     {
-        //when the brick is it, it gets called and checks every brick the gameManager got at the load of the scene if they are active
-        //if one of them is, it returns false and stops the function
+        //when the brick is hit, it gets called and checks every brick the gameManager got at the load of the scene if they are active
+        //if one of them is active, it returns false and stops the function
         for(int i = 0; i < this.bricks.Length; i++)
         {
             if (this.bricks[i].gameObject.activeInHierarchy && !this.bricks[i].unbreakable)
@@ -101,5 +106,24 @@ public class GameManagerScript : MonoBehaviour
             }
         }
         return true;
+    }
+
+    //When a brick is hit and the random number is within the possibility (it's in the brick script), it gets called.
+    //it selects a random powerUp from the table of powerUps and spawns it where the brick is
+    public void SpawnPowerUp(Vector3 brickPos)
+    {
+        int powerUpIndex = Random.Range(0, PowerUps.Length - 1);
+        Instantiate(PowerUps[powerUpIndex], brickPos, Quaternion.identity);
+    }
+    public void PowerUpActive(int index)
+    {
+        if (index == 0)
+        {
+            //to do
+        }
+    }
+    private void TripleBallPowerUp() 
+    { 
+        //code to do later
     }
 }

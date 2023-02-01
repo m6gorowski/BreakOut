@@ -24,7 +24,7 @@ public class BallScript : MonoBehaviour
     private void SetRandomTrajectory()
     {
         Vector2 force = Vector2.zero;
-        force.x = Random.Range(-1f, 1f);
+        force.x = Random.Range(-0.75f, 0.75f);
         force.y = -1f;
         this.rb.AddForce(force.normalized * this._speed);
     }
