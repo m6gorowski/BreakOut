@@ -19,6 +19,9 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField]
     private GameObject[] PowerUps;
 
+    [SerializeField]
+    private GameObject Ball;
+
     public BallScript ball { get; private set; }
     public PaddleScript paddle { get; private set; }
     public BrickScript[] bricks { get; private set; }
@@ -53,7 +56,8 @@ public class GameManagerScript : MonoBehaviour
     private void ResetLevel()
     {
         //resets the position and velocity of the paddle and ball
-        this.ball.ResetBall();
+        //this.ball.ResetBall();
+        Instantiate(Ball, Vector2.zero, Quaternion.identity);
         this.paddle.ResetPaddle();
     }
     private void GameOver()
@@ -119,11 +123,12 @@ public class GameManagerScript : MonoBehaviour
     {
         if (index == 0)
         {
-            //to do
+            TripleBallPowerUp();
         }
     }
     private void TripleBallPowerUp() 
-    { 
-        //code to do later
+    {
+        Instantiate(Ball, Vector3.zero, Quaternion.identity);
+        Instantiate(Ball, Vector3.zero, Quaternion.identity);
     }
 }

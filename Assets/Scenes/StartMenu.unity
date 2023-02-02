@@ -692,6 +692,9 @@ MonoBehaviour:
   lives: 3
   score: 0
   _maxLevelAmount: 5
+  PowerUps:
+  - {fileID: 7015561277456336520, guid: d966af2c57c628b4d895b9b8abd525fd, type: 3}
+  Ball: {fileID: 8355776483718579059, guid: c30351848a6de5f42a7204db2d5fec33, type: 3}
 --- !u!4 &961113598
 Transform:
   m_ObjectHideFlags: 0

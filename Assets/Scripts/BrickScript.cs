@@ -60,7 +60,7 @@ public class BrickScript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.name == "Ball")
+        if (other.gameObject.tag == "Ball")
         {
             Hit();
         }

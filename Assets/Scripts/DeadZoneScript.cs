@@ -9,25 +9,12 @@ public class DeadZoneScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Ball")
         {
-            if (CheckBalls())
-            {
-                Destroy(other.gameObject);
-            }
-            else
+            GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+            other.gameObject.SetActive(false);
+            if (balls.Length <= 1)
             {
                 FindObjectOfType<GameManagerScript>().Miss();
-            }  
+            }
         }
-    }
-
-    //Checks if it was the last ball on the scene that hit the DeadZone
-    private bool CheckBalls()
-    {
-        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
-        if(balls.Length > 1)
-        {            
-            return true;
-        }
-        return false;        
     }
 }
