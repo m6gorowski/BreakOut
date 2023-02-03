@@ -53,7 +53,7 @@ public class BrickScript : MonoBehaviour
 
     private void PowerUpDrop()
     {
-        if ( Random.Range(0f, 1f) <= this._powerUpProbability) 
+        if ( Mathf.Round(Random.Range(0f, 1f) * 100)/100 <= this._powerUpProbability) 
         {
             FindObjectOfType<GameManagerScript>().SpawnPowerUp(this.transform.position);
         }

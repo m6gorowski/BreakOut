@@ -39,8 +39,9 @@ public class PaddleScript : MonoBehaviour
     {
         //get the script of the ball, since we change it's values
         BallScript ball = other.gameObject.GetComponent<BallScript>();
+        ExtraBallScript extraBall = other.gameObject.GetComponent<ExtraBallScript>();
         //if the ball is the object the paddle hit, do the following
-        if (ball != null)
+        if (ball != null || extraBall != null)
         {
             //paddlePosition is the point in space of the centre of the paddle, while contactPoint is the first point on the paddle the ball hit
             Vector3 paddlePosition = this.transform.position;
@@ -54,14 +55,26 @@ public class PaddleScript : MonoBehaviour
 
             /*gets the current angle the ball was going, calculates the angle it should bounce
              * (the "%" * max angle it can bounce, and gets the new angle the ball should go */
-            float currentAngle = Vector2.SignedAngle(Vector2.up, ball.rb.velocity);
-            float bounceAngle = (offset / width) * this.maxBounceAngle;
-            float newAngle = Mathf.Clamp(currentAngle + bounceAngle, -this.maxBounceAngle, this.maxBounceAngle);
-
-            //translates the new angle into quaternions
-            Quaternion rotation = Quaternion.AngleAxis(newAngle, Vector3.forward);
-            //applies the new angle to the ball
-            ball.rb.velocity = rotation * Vector2.up * ball.rb.velocity.magnitude;
+            if(ball != null)
+            {
+                float currentAngle = Vector2.SignedAngle(Vector2.up, ball.rb.velocity);
+                float bounceAngle = (offset / width) * this.maxBounceAngle;
+                float newAngle = Mathf.Clamp(currentAngle + bounceAngle, -this.maxBounceAngle, this.maxBounceAngle);
+                //translates the new angle into quaternions
+                Quaternion rotation = Quaternion.AngleAxis(newAngle, Vector3.forward);
+                //applies the new angle to the ball
+                ball.rb.velocity = rotation * Vector2.up * ball.rb.velocity.magnitude;
+            }
+            else if(extraBall != null)
+            {
+                float currentAngle = Vector2.SignedAngle(Vector2.up, extraBall.rb.velocity);
+                float bounceAngle = (offset / width) * this.maxBounceAngle;
+                float newAngle = Mathf.Clamp(currentAngle + bounceAngle, -this.maxBounceAngle, this.maxBounceAngle);
+                Quaternion rotation = Quaternion.AngleAxis(newAngle, Vector3.forward);
+                extraBall.rb.velocity = rotation * Vector2.up * extraBall.rb.velocity.magnitude;
+            }
+            /*Honestly, I didn't have any idea how to do this on two different types of BallScripts
+             * except separating the part of BallScript to make it behave differently if the ball name is "ExtraBall", hence the nested "if" conditions*/
         }
     }
 }

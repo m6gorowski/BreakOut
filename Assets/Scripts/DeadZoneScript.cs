@@ -9,8 +9,8 @@ public class DeadZoneScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Ball")
         {
-            GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
-            other.gameObject.SetActive(false);
+            GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");            
+            Destroy(other.gameObject);
             if (balls.Length <= 1)
             {
                 FindObjectOfType<GameManagerScript>().Miss();

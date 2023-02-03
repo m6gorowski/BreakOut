@@ -12,6 +12,7 @@ public class GameManagerScript : MonoBehaviour
     public int level = 1;
     public int lives = 3;
     public int score = 0;
+    
     [SerializeField]
     private int _maxLevelAmount = 5;
 
@@ -19,12 +20,16 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField]
     private GameObject[] PowerUps;
 
+    public float extraBallOffset = 2f;
     [SerializeField]
-    private GameObject Ball;
+    private GameObject BallPref;
+    [SerializeField]
+    private GameObject extraBallPref;
 
     public BallScript ball { get; private set; }
     public PaddleScript paddle { get; private set; }
     public BrickScript[] bricks { get; private set; }
+    public PowerUpScript[] powerUps { get; private set; }
     private void Awake()
     {
         //DontDestroyOnLoad makes the gameObject apparent on every level.
@@ -56,9 +61,15 @@ public class GameManagerScript : MonoBehaviour
     private void ResetLevel()
     {
         //resets the position and velocity of the paddle and ball
-        //this.ball.ResetBall();
-        Instantiate(Ball, Vector2.zero, Quaternion.identity);
+        
+        this.powerUps = FindObjectsOfType<PowerUpScript>();
+        foreach(PowerUpScript powerup in this.powerUps)
+        {
+            Destroy(powerup.gameObject);
+        }
+        Instantiate(BallPref, Vector2.zero, Quaternion.identity);
         this.paddle.ResetPaddle();
+
     }
     private void GameOver()
     {
@@ -128,7 +139,7 @@ public class GameManagerScript : MonoBehaviour
     }
     private void TripleBallPowerUp() 
     {
-        Instantiate(Ball, Vector3.zero, Quaternion.identity);
-        Instantiate(Ball, Vector3.zero, Quaternion.identity);
+        Instantiate(extraBallPref, new Vector2(paddle.transform.position.x + 0.5f, paddle.transform.position.y + extraBallOffset), Quaternion.identity);
+        Instantiate(extraBallPref, new Vector2(paddle.transform.position.x - 0.5f, paddle.transform.position.y + extraBallOffset), Quaternion.identity);
     }
 }

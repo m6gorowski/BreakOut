@@ -28,7 +28,6 @@ public class PowerUpScript : MonoBehaviour
     {
         if (other.gameObject.name == "Paddle")
         {
-            Debug.Log("Zetknieto sie z power Upem");
             FindObjectOfType<GameManagerScript>().PowerUpActive(PowerUpIndex);
             Destroy(this.gameObject);
         }
