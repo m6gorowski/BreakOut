@@ -22,14 +22,18 @@ public class GameManagerScript : MonoBehaviour
 
     public float extraBallOffset = 2f;
     [SerializeField]
-    private GameObject BallPref;
+    private GameObject _BallPref;
     [SerializeField]
-    private GameObject extraBallPref;
+    private GameObject _extraBallPref;
 
     public BallScript ball { get; private set; }
     public PaddleScript paddle { get; private set; }
     public BrickScript[] bricks { get; private set; }
     public PowerUpScript[] powerUps { get; private set; }
+    [SerializeField]
+    private float _powerUpTime;
+    [SerializeField]
+    private float _bigPaddleScale;
     private void Awake()
     {
         //DontDestroyOnLoad makes the gameObject apparent on every level.
@@ -67,7 +71,7 @@ public class GameManagerScript : MonoBehaviour
         {
             Destroy(powerup.gameObject);
         }
-        Instantiate(BallPref, Vector2.zero, Quaternion.identity);
+        Instantiate(_BallPref, Vector2.zero, Quaternion.identity);
         this.paddle.ResetPaddle();
 
     }
@@ -127,7 +131,8 @@ public class GameManagerScript : MonoBehaviour
     //it selects a random powerUp from the table of powerUps and spawns it where the brick is
     public void SpawnPowerUp(Vector3 brickPos)
     {
-        int powerUpIndex = Random.Range(0, PowerUps.Length - 1);
+        int powerUpIndex = Random.Range(0, PowerUps.Length);
+        Debug.Log(powerUpIndex);
         Instantiate(PowerUps[powerUpIndex], brickPos, Quaternion.identity);
     }
     public void PowerUpActive(int index)
@@ -136,10 +141,25 @@ public class GameManagerScript : MonoBehaviour
         {
             TripleBallPowerUp();
         }
+        else if(index == 1)
+        {
+            LongPaddlePowerUp();
+        }
+    }
+    private IEnumerator PowerUpCoroutine()
+    {
+        yield return new WaitForSeconds(_powerUpTime);
     }
     private void TripleBallPowerUp() 
     {
-        Instantiate(extraBallPref, new Vector2(paddle.transform.position.x + 0.5f, paddle.transform.position.y + extraBallOffset), Quaternion.identity);
-        Instantiate(extraBallPref, new Vector2(paddle.transform.position.x - 0.5f, paddle.transform.position.y + extraBallOffset), Quaternion.identity);
+        Instantiate(_extraBallPref, new Vector2(paddle.transform.position.x + 0.5f, paddle.transform.position.y + extraBallOffset), Quaternion.identity);
+        Instantiate(_extraBallPref, new Vector2(paddle.transform.position.x - 0.5f, paddle.transform.position.y + extraBallOffset), Quaternion.identity);
+    }    
+    private void LongPaddlePowerUp()
+    {
+        float currentScale = paddle.transform.localScale.x;
+        paddle.transform.localScale = new Vector3(_bigPaddleScale * currentScale, paddle.transform.localScale.y, paddle.transform.localScale.z);
+        StartCoroutine(PowerUpCoroutine());
+        paddle.transform.localScale = new Vector3(currentScale, paddle.transform.localScale.y, paddle.transform.localScale.z); ;
     }
 }
