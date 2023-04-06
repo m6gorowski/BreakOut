@@ -9,11 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8173955932146279094, guid: d966af2c57c628b4d895b9b8abd525fd, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 5.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8173955932146279094, guid: d966af2c57c628b4d895b9b8abd525fd, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 5.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5119252536268566043, guid: d966af2c57c628b4d895b9b8abd525fd, type: 3}
       propertyPath: PowerUpIndex
@@ -67,6 +67,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 3102285daa25e0945b53ba4d292ff4f6, type: 3}
+    - target: {fileID: 7009850080237590052, guid: d966af2c57c628b4d895b9b8abd525fd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009850080237590052, guid: d966af2c57c628b4d895b9b8abd525fd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1385528127
+      objectReference: {fileID: 0}
     - target: {fileID: 7015561277456336520, guid: d966af2c57c628b4d895b9b8abd525fd, type: 3}
       propertyPath: m_Name
       value: LongPaddlePowerUp

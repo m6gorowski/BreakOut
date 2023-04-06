@@ -30,10 +30,12 @@ public class GameManagerScript : MonoBehaviour
     public PaddleScript paddle { get; private set; }
     public BrickScript[] bricks { get; private set; }
     public PowerUpScript[] powerUps { get; private set; }
+    
     [SerializeField]
     private float _powerUpTime;
     [SerializeField]
     private float _bigPaddleScale;
+
     private void Awake()
     {
         //DontDestroyOnLoad makes the gameObject apparent on every level.
@@ -50,7 +52,7 @@ public class GameManagerScript : MonoBehaviour
         //Restarts the game
         this.score = 0;
         this.lives = 3;
-        LoadLevel(1);
+        LoadLevel(_startingLevel);
     }
     public void LoadLevel(int level)
     {
@@ -132,7 +134,7 @@ public class GameManagerScript : MonoBehaviour
     public void SpawnPowerUp(Vector3 brickPos)
     {
         int powerUpIndex = Random.Range(0, PowerUps.Length);
-        Debug.Log(powerUpIndex);
+        //Debug.Log(powerUpIndex);
         Instantiate(PowerUps[powerUpIndex], brickPos, Quaternion.identity);
     }
     public void PowerUpActive(int index)
@@ -143,23 +145,18 @@ public class GameManagerScript : MonoBehaviour
         }
         else if(index == 1)
         {
-            LongPaddlePowerUp();
+            StartCoroutine(LongPaddlePowerUp());
         }
     }
-    private IEnumerator PowerUpCoroutine()
+    private IEnumerator LongPaddlePowerUp()
     {
+        paddle.transform.localScale = new Vector3(_bigPaddleScale * paddle.transform.localScale.x, paddle.transform.localScale.y, paddle.transform.localScale.z);
         yield return new WaitForSeconds(_powerUpTime);
+        paddle.transform.localScale = new Vector3(paddle.transform.localScale.x / _bigPaddleScale, paddle.transform.localScale.y, paddle.transform.localScale.z);
     }
     private void TripleBallPowerUp() 
     {
         Instantiate(_extraBallPref, new Vector2(paddle.transform.position.x + 0.5f, paddle.transform.position.y + extraBallOffset), Quaternion.identity);
         Instantiate(_extraBallPref, new Vector2(paddle.transform.position.x - 0.5f, paddle.transform.position.y + extraBallOffset), Quaternion.identity);
-    }    
-    private void LongPaddlePowerUp()
-    {
-        float currentScale = paddle.transform.localScale.x;
-        paddle.transform.localScale = new Vector3(_bigPaddleScale * currentScale, paddle.transform.localScale.y, paddle.transform.localScale.z);
-        StartCoroutine(PowerUpCoroutine());
-        paddle.transform.localScale = new Vector3(currentScale, paddle.transform.localScale.y, paddle.transform.localScale.z); ;
     }
 }
