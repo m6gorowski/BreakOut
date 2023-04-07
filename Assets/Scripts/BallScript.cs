@@ -39,6 +39,7 @@ public class BallScript : MonoBehaviour
 
         Invoke(nameof(SetRandomTrajectory), 1f);
     }
+    //this method is there to prevent two balls from colliding at the start, for ex.:left one goes right, right one goes left
     private IEnumerator SetTriggerCoroutine()
     {
         cc.isTrigger = true;

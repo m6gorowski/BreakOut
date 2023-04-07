@@ -25,6 +25,8 @@ public class GameManagerScript : MonoBehaviour
     private GameObject _BallPref;
     [SerializeField]
     private GameObject _extraBallPref;
+    [SerializeField]
+    private GameObject _bouncyBallPref;
 
     public BallScript ball { get; private set; }
     public PaddleScript paddle { get; private set; }
@@ -69,9 +71,14 @@ public class GameManagerScript : MonoBehaviour
         //resets the position and velocity of the paddle and ball
         
         this.powerUps = FindObjectsOfType<PowerUpScript>();
+        BouncyBallScript[] _bouncyBalls = FindObjectsOfType<BouncyBallScript>();
         foreach(PowerUpScript powerup in this.powerUps)
         {
             Destroy(powerup.gameObject);
+        }
+        foreach(BouncyBallScript ball in _bouncyBalls)
+        {
+            Destroy(ball.gameObject);
         }
         Instantiate(_BallPref, Vector2.zero, Quaternion.identity);
         this.paddle.ResetPaddle();
@@ -134,7 +141,7 @@ public class GameManagerScript : MonoBehaviour
     public void SpawnPowerUp(Vector3 brickPos)
     {
         int powerUpIndex = Random.Range(0, PowerUps.Length);
-        //Debug.Log(powerUpIndex);
+        Debug.Log(powerUpIndex);
         Instantiate(PowerUps[powerUpIndex], brickPos, Quaternion.identity);
     }
     public void PowerUpActive(int index)
@@ -147,6 +154,10 @@ public class GameManagerScript : MonoBehaviour
         {
             StartCoroutine(LongPaddlePowerUp());
         }
+        else if(index == 2)
+        {
+            BouncyBallPowerUp();
+        }
     }
     private IEnumerator LongPaddlePowerUp()
     {
@@ -158,5 +169,9 @@ public class GameManagerScript : MonoBehaviour
     {
         Instantiate(_extraBallPref, new Vector2(paddle.transform.position.x + 0.5f, paddle.transform.position.y + extraBallOffset), Quaternion.identity);
         Instantiate(_extraBallPref, new Vector2(paddle.transform.position.x - 0.5f, paddle.transform.position.y + extraBallOffset), Quaternion.identity);
+    }
+    private void BouncyBallPowerUp() 
+    {
+        Instantiate(_bouncyBallPref, new Vector2(paddle.transform.position.x, paddle.transform.position.y + extraBallOffset), Quaternion.identity);
     }
 }
