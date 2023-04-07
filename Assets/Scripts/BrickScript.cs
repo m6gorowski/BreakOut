@@ -36,18 +36,19 @@ public class BrickScript : MonoBehaviour
         {
             return;
         }
+        
 
         this.health--;
 
         if(this.health <= 0)
-        {
-            PowerUpDrop();
+        {            
             this.gameObject.SetActive(false);
         }
         else
         {
             this.SpriteRenderer.color = this._states[health - 1];
         }
+        PowerUpDrop();
         FindObjectOfType<GameManagerScript>().Hit(this);
     }
 
