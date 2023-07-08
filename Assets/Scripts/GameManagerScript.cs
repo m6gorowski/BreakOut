@@ -38,13 +38,11 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField]
     private float _bigPaddleScale;
 
-
-
     private void Awake()
     {
         //DontDestroyOnLoad makes the gameObject apparent on every level.
         DontDestroyOnLoad(this.gameObject);
-        //gets all the bricks, the ball and the paddle from the level every time a scene is loaded
+        //gets all the bricks, the ball and the paddle from the level every time a scene is loaded + stops coroutines connected to powerups
         SceneManager.sceneLoaded += OnLevelLoaded;
     }
     private void Start()
@@ -65,6 +63,7 @@ public class GameManagerScript : MonoBehaviour
         if(level > _maxLevelAmount)
         {
             SceneManager.LoadScene("FinishScene");
+            return;
         }
         SceneManager.LoadScene("Level" + level);
     }
@@ -96,6 +95,7 @@ public class GameManagerScript : MonoBehaviour
         this.ball = FindObjectOfType<BallScript>();
         this.paddle = FindObjectOfType<PaddleScript>();
         this.bricks = FindObjectsOfType<BrickScript>();
+        StopAllCoroutines();
     }
     public void Miss()
     {
