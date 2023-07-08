@@ -687,11 +687,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e2e8f6f972212b45b18fa8dd52e92a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingLevel: 2
+  _startingLevel: 1
   level: 0
   lives: 3
   score: 0
-  _maxLevelAmount: 2
+  _maxLevelAmount: 5
   PowerUps:
   - {fileID: 7015561277456336520, guid: d966af2c57c628b4d895b9b8abd525fd, type: 3}
   - {fileID: 1486805645015667485, guid: cf5e51c43d037f34ea67da4f016ed180, type: 3}

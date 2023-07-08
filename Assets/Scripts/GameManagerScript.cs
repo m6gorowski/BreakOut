@@ -38,7 +38,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField]
     private float _bigPaddleScale;
 
-    private Coroutine _longPaddleCoroutine = null;
+
 
     private void Awake()
     {
@@ -100,7 +100,7 @@ public class GameManagerScript : MonoBehaviour
     public void Miss()
     {
         //is called when the ball gets in the DeadZone - makes the number of player lives go down and it either restarts the level or the game
-        StopCoroutine(_longPaddleCoroutine);
+        StopAllCoroutines(); //it's for the longPaddle power up routine, so the paddle doesn't get smaller after the restart
         this.lives--;
         if (this.lives > 0)
         {
@@ -151,7 +151,7 @@ public class GameManagerScript : MonoBehaviour
         }
         else if(index == 1)
         {
-            _longPaddleCoroutine = StartCoroutine(LongPaddlePowerUp());
+            StartCoroutine(LongPaddlePowerUp());
         }
         else if(index == 2)
         {
