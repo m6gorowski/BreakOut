@@ -7,8 +7,9 @@ public class PaddleScript : MonoBehaviour
     public Rigidbody2D rb { get; private set; }
     public Vector2 direction { get; private set; }
     public Vector3 normalScale { get; private set; }
+    public float _speed = 30f;
     [SerializeField]
-    private float _speed = 30f;
+    private float _normalSpeed = 30f;
     [SerializeField]
     private float maxBounceAngle = 75f;
     private void Awake()
@@ -21,6 +22,7 @@ public class PaddleScript : MonoBehaviour
         this.transform.position = new Vector2(0f, this.transform.position.y);
         this.rb.velocity = Vector2.zero;
         this.transform.localScale = normalScale;
+        this._speed = _normalSpeed;
     }
 
     private void Update()

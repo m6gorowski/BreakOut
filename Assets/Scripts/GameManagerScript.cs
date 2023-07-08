@@ -37,6 +37,8 @@ public class GameManagerScript : MonoBehaviour
     private float _powerUpTime;
     [SerializeField]
     private float _bigPaddleScale;
+    [SerializeField]
+    private float _speedMultiplier;
 
     private void Awake()
     {
@@ -157,6 +159,10 @@ public class GameManagerScript : MonoBehaviour
         {
             BouncyBallPowerUp();
         }
+        else if (index == 3)
+        {
+            StartCoroutine(SpeedPowerUp());
+        }
     }
     private IEnumerator LongPaddlePowerUp()
     {
@@ -172,5 +178,11 @@ public class GameManagerScript : MonoBehaviour
     private void BouncyBallPowerUp() 
     {
         Instantiate(_bouncyBallPref, new Vector2(paddle.transform.position.x, paddle.transform.position.y + extraBallOffset), Quaternion.identity);
+    }
+    private IEnumerator SpeedPowerUp()
+    {
+        paddle._speed *= _speedMultiplier;
+        yield return new WaitForSeconds(_powerUpTime);
+        paddle._speed /= _speedMultiplier;
     }
 }
