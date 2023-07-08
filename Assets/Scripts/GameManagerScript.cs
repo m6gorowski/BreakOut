@@ -38,6 +38,8 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField]
     private float _bigPaddleScale;
 
+    private Coroutine _longPaddleCoroutine = null;
+
     private void Awake()
     {
         //DontDestroyOnLoad makes the gameObject apparent on every level.
@@ -68,8 +70,7 @@ public class GameManagerScript : MonoBehaviour
     }
     private void ResetLevel()
     {
-        //resets the position and velocity of the paddle and ball
-        
+        //resets the position, scale and velocity of the paddle and ball
         this.powerUps = FindObjectsOfType<PowerUpScript>();
         BouncyBallScript[] _bouncyBalls = FindObjectsOfType<BouncyBallScript>();
         foreach(PowerUpScript powerup in this.powerUps)
@@ -82,7 +83,6 @@ public class GameManagerScript : MonoBehaviour
         }
         Instantiate(_BallPref, Vector2.zero, Quaternion.identity);
         this.paddle.ResetPaddle();
-
     }
     private void GameOver()
     {
@@ -100,7 +100,7 @@ public class GameManagerScript : MonoBehaviour
     public void Miss()
     {
         //is called when the ball gets in the DeadZone - makes the number of player lives go down and it either restarts the level or the game
-                
+        StopCoroutine(_longPaddleCoroutine);
         this.lives--;
         if (this.lives > 0)
         {
@@ -141,7 +141,6 @@ public class GameManagerScript : MonoBehaviour
     public void SpawnPowerUp(Vector3 brickPos)
     {
         int powerUpIndex = Random.Range(0, PowerUps.Length);
-        Debug.Log(powerUpIndex);
         Instantiate(PowerUps[powerUpIndex], brickPos, Quaternion.identity);
     }
     public void PowerUpActive(int index)
@@ -152,7 +151,7 @@ public class GameManagerScript : MonoBehaviour
         }
         else if(index == 1)
         {
-            StartCoroutine(LongPaddlePowerUp());
+            _longPaddleCoroutine = StartCoroutine(LongPaddlePowerUp());
         }
         else if(index == 2)
         {

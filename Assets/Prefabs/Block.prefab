@@ -128,6 +128,6 @@ MonoBehaviour:
   - {r: 0.83921576, g: 0.7686275, b: 0, a: 1}
   - {r: 0.83921576, g: 0.5254902, b: 0, a: 1}
   - {r: 0.83921576, g: 0.07450981, b: 0, a: 1}
-  _powerUpProbability: 0.34
+  _powerUpProbability: 0.23
   points: 10
   unbreakable: 0
