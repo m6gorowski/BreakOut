@@ -43,15 +43,14 @@ public class PaddleScript : MonoBehaviour
 
     //collision mechanics with the ball
     private void OnCollisionEnter2D(Collision2D other)
-    {
-        AudioManagerScript.PlaySFX(AudioManagerScript.paddleHit);
+    {        
         //get the script of the ball, since we change it's values
         BallScript ball = other.gameObject.GetComponent<BallScript>();
         ExtraBallScript extraBall = other.gameObject.GetComponent<ExtraBallScript>();
         //if the ball is the object the paddle hit, do the following
         if (ball != null || extraBall != null)
         {
-
+            AudioManagerScript.PlaySFX(AudioManagerScript.paddleHit);
             //paddlePosition is the point in space of the centre of the paddle, while contactPoint is the first point on the paddle the ball hit
             Vector3 paddlePosition = this.transform.position;
             Vector2 contactPoint = other.GetContact(0).point;
