@@ -7,14 +7,13 @@ public class PowerUpScript : MonoBehaviour
     [SerializeField]
     private float _speed = 3f;
     public int PowerUpIndex = 0;
+    public AudioManagerScript AudioManagerScript { get; private set; }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        this.AudioManagerScript = GameObject.FindObjectOfType<AudioManagerScript>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(_speed * Vector3.down * Time.deltaTime);
@@ -28,6 +27,7 @@ public class PowerUpScript : MonoBehaviour
     {
         if (other.gameObject.name == "Paddle")
         {
+            AudioManagerScript.PlaySFX(AudioManagerScript.powerUpHit);
             FindObjectOfType<GameManagerScript>().PowerUpActive(PowerUpIndex);
             Destroy(this.gameObject);
         }

@@ -7,15 +7,17 @@ public class PaddleScript : MonoBehaviour
     public Rigidbody2D rb { get; private set; }
     public Vector2 direction { get; private set; }
     public Vector3 normalScale { get; private set; }
-    public float _speed = 30f;
+    public float _speed = 35f;
     [SerializeField]
-    private float _normalSpeed = 30f;
+    private float _normalSpeed = 35f;
     [SerializeField]
     private float maxBounceAngle = 75f;
+    public AudioManagerScript AudioManagerScript { get; private set; }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         normalScale = this.transform.localScale;
+        this.AudioManagerScript = GameObject.FindObjectOfType<AudioManagerScript>();
     }
     public void ResetPaddle()
     {
@@ -42,12 +44,14 @@ public class PaddleScript : MonoBehaviour
     //collision mechanics with the ball
     private void OnCollisionEnter2D(Collision2D other)
     {
+        AudioManagerScript.PlaySFX(AudioManagerScript.paddleHit);
         //get the script of the ball, since we change it's values
         BallScript ball = other.gameObject.GetComponent<BallScript>();
         ExtraBallScript extraBall = other.gameObject.GetComponent<ExtraBallScript>();
         //if the ball is the object the paddle hit, do the following
         if (ball != null || extraBall != null)
         {
+
             //paddlePosition is the point in space of the centre of the paddle, while contactPoint is the first point on the paddle the ball hit
             Vector3 paddlePosition = this.transform.position;
             Vector2 contactPoint = other.GetContact(0).point;

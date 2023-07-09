@@ -1253,6 +1253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 35
+  _normalSpeed: 35
   maxBounceAngle: 70
 --- !u!50 &1113452705
 Rigidbody2D:

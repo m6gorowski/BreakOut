@@ -14,9 +14,11 @@ public class BrickScript : MonoBehaviour
     public int points = 10;
     public SpriteRenderer SpriteRenderer { get; private set; }
     public bool unbreakable;
+    public AudioManagerScript AudioManagerScript { get; private set; }
     private void Awake()
     {
         this.SpriteRenderer = GetComponent<SpriteRenderer>();
+        this.AudioManagerScript = GameObject.FindObjectOfType<AudioManagerScript>();
     }
     private void Start()
     {
@@ -36,8 +38,8 @@ public class BrickScript : MonoBehaviour
         {
             return;
         }
-        
 
+        AudioManagerScript.PlaySFX(AudioManagerScript.ballHit);
         this.health--;
 
         if(this.health <= 0)
