@@ -42,7 +42,6 @@ public class GameManagerScript : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate = 12;
         //DontDestroyOnLoad makes the gameObject apparent on every level.
         DontDestroyOnLoad(this.gameObject);
         //gets all the bricks, the ball and the paddle from the level every time a scene is loaded + stops coroutines connected to powerups
