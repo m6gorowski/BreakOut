@@ -8,10 +8,12 @@ public class PauseMenuScript : MonoBehaviour
     [SerializeField]
     private GameObject _pauseMenu;
     private bool isPaused;
+    public AudioManagerScript AudioManagerScript { get; private set; }
     void Awake()
     {
         DontDestroyOnLoad(this);
         this.gameObject.SetActive(false);
+        this.AudioManagerScript = GameObject.FindObjectOfType<AudioManagerScript>();
     }
 
     void Update()
@@ -32,12 +34,14 @@ public class PauseMenuScript : MonoBehaviour
         _pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+        AudioManagerScript.musicSource.Pause();
     }
     public void ResumeGame()
     {
         _pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        AudioManagerScript.musicSource.UnPause();
     }
     public void BackToMenu()
     {

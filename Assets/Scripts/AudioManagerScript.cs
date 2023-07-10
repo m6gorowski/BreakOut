@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 public class AudioManagerScript : MonoBehaviour
 {
     [Header("Audio Source")]
-    [SerializeField] private AudioSource _musicSource;
+    public AudioSource musicSource;
     [SerializeField] private AudioSource _sfxSource;
 
     [Header("Audio Clips")]
@@ -17,8 +17,8 @@ public class AudioManagerScript : MonoBehaviour
 
     private void Start()
     {
-        _musicSource.clip = _backgroundMusic;
-        _musicSource.Play();
+        musicSource.clip = _backgroundMusic;
+        musicSource.Play();
     }
 
     public void PlaySFX(AudioClip audioClip)

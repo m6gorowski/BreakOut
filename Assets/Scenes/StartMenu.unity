@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb65c2f004cbe5f4e858201b91715cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _musicSource: {fileID: 2021718303}
+  musicSource: {fileID: 2021718303}
   _sfxSource: {fileID: 1613999864}
   _backgroundMusic: {fileID: 8300000, guid: d9cf8353607eb214cbe0dc00d2a46b18, type: 3}
   ballHit: {fileID: 8300000, guid: 80dd7a118b4c490489f980513a436ef3, type: 3}
@@ -2156,6 +2156,7 @@ MonoBehaviour:
   _powerUpTime: 10
   _bigPaddleScale: 1.4
   _speedMultiplier: 2
+  _pauseCanvas: {fileID: 325085564}
 --- !u!4 &961113598
 Transform:
   m_ObjectHideFlags: 0
