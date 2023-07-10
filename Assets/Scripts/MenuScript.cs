@@ -12,9 +12,9 @@ public class MenuScript : MonoBehaviour
     private Slider _musicSlider;
     [SerializeField]
     private Slider _sfxSlider;
-
     private void Start()
     {
+        //Since we want to save the player's preferences, we have to store them inside PlayerPrefs
         if (PlayerPrefs.HasKey("musicVolume"))
         {
             _musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
@@ -32,7 +32,7 @@ public class MenuScript : MonoBehaviour
         Debug.Log("game closed");
     }
     public void StartButton()
-    {
+    {        
         FindObjectOfType<GameManagerScript>().NewGame();
     }
 

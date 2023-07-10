@@ -39,6 +39,8 @@ public class GameManagerScript : MonoBehaviour
     private float _bigPaddleScale;
     [SerializeField]
     private float _speedMultiplier;
+    [SerializeField]
+    private GameObject _pauseCanvas;
 
     private void Awake()
     {
@@ -54,6 +56,7 @@ public class GameManagerScript : MonoBehaviour
     public void NewGame()
     {
         //Restarts the game
+        _pauseCanvas.SetActive(true);
         this.score = 0;
         this.lives = 3;
         LoadLevel(_startingLevel);
@@ -64,6 +67,7 @@ public class GameManagerScript : MonoBehaviour
         this.level = level;
         if(level > _maxLevelAmount)
         {
+            _pauseCanvas.SetActive(false);
             SceneManager.LoadScene("FinishScene");
             return;
         }
