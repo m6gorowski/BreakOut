@@ -686,7 +686,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1038696170}
-        m_TargetAssemblyTypeName: StartMenuScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
         m_MethodName: StartButton
         m_Mode: 1
         m_Arguments:
@@ -1387,7 +1387,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1038696165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b988dfd2266c904cabf68e01072b0f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 61e0d8a3ac283fa45bc5f1131cfe80b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _audioMixer: {fileID: 24100000, guid: a735381ea24cf1c469344f692a75e24d, type: 2}
@@ -1533,7 +1533,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1038696170}
-        m_TargetAssemblyTypeName: StartMenuScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
         m_MethodName: QuitButton
         m_Mode: 1
         m_Arguments:
@@ -2351,7 +2351,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1038696170}
-        m_TargetAssemblyTypeName: StartMenuScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
         m_Arguments:
@@ -2453,7 +2453,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1038696170}
-        m_TargetAssemblyTypeName: StartMenuScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
         m_MethodName: SetSFXVolume
         m_Mode: 0
         m_Arguments:

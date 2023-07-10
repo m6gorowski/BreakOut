@@ -1,9 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
-public class StartMenuScript : MonoBehaviour
+public class MenuScript : MonoBehaviour
 {
     [SerializeField]
     private AudioMixer _audioMixer;
@@ -47,5 +48,4 @@ public class StartMenuScript : MonoBehaviour
         _audioMixer.SetFloat("sfxVolume", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("sfxVolume", volume);
     }
-
 }
