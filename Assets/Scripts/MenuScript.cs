@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
@@ -14,11 +15,8 @@ public class MenuScript : MonoBehaviour
     private Slider _sfxSlider;
     [SerializeField]
     private Toggle _postProcessingToggle;
-    public GameObject postProcessing { get; private set; }
-    private void Awake()
-    {
-        postProcessing = GameObject.Find("PostProcessing");
-    }
+    [SerializeField]
+    private GameObject _postProcessing;
     private void Start()
     {
         //Since we want to save the player's preferences, we have to store them inside PlayerPrefs
@@ -62,19 +60,18 @@ public class MenuScript : MonoBehaviour
 
     public void SetEffects(bool isPostprocessing)
     {
-        if(!isPostprocessing)
-        {
-            postProcessing.SetActive(false);
-            PlayerPrefs.SetInt("PostProcessing", 0);
-            return;
-        }
-        postProcessing.SetActive(true);
-        PlayerPrefs.SetInt("PostProcessing", 1);
+        _postProcessing.SetActive(isPostprocessing);
+        PlayerPrefs.SetInt("PostProcessing", BoolToInt(isPostprocessing));
     }
 
     private bool IntToBool(int number)
     {
         if (number != 0) return true;
-        else return false;
+        return false;
+    }
+    private int BoolToInt(bool state)
+    {
+        if (state) return 1;
+        return 0;
     }
 }
