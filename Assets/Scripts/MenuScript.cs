@@ -12,6 +12,13 @@ public class MenuScript : MonoBehaviour
     private Slider _musicSlider;
     [SerializeField]
     private Slider _sfxSlider;
+    [SerializeField]
+    private Toggle _postProcessingToggle;
+    public GameObject postProcessing { get; private set; }
+    private void Awake()
+    {
+        postProcessing = GameObject.Find("PostProcessing");
+    }
     private void Start()
     {
         //Since we want to save the player's preferences, we have to store them inside PlayerPrefs
@@ -25,6 +32,10 @@ public class MenuScript : MonoBehaviour
         }
         SetMusicVolume(_musicSlider.value);
         SetSFXVolume(_sfxSlider.value);
+        if (PlayerPrefs.HasKey("PostProcessing"))
+        {
+            _postProcessingToggle.isOn = IntToBool(PlayerPrefs.GetInt("PostProcessing"));
+        }
     }
     public void QuitButton()
     {
@@ -47,5 +58,23 @@ public class MenuScript : MonoBehaviour
     {
         _audioMixer.SetFloat("sfxVolume", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("sfxVolume", volume);
+    }
+
+    public void SetEffects(bool isPostprocessing)
+    {
+        if(!isPostprocessing)
+        {
+            postProcessing.SetActive(false);
+            PlayerPrefs.SetInt("PostProcessing", 0);
+            return;
+        }
+        postProcessing.SetActive(true);
+        PlayerPrefs.SetInt("PostProcessing", 1);
+    }
+
+    private bool IntToBool(int number)
+    {
+        if (number != 0) return true;
+        else return false;
     }
 }
