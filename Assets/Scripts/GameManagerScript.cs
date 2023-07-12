@@ -32,7 +32,9 @@ public class GameManagerScript : MonoBehaviour
     public PaddleScript paddle { get; private set; }
     public BrickScript[] bricks { get; private set; }
     public PowerUpScript[] powerUps { get; private set; }
-    
+
+    public ShowLivesScript livesScript { get; private set; }
+
     [SerializeField]
     private float _powerUpTime;
     [SerializeField]
@@ -65,7 +67,7 @@ public class GameManagerScript : MonoBehaviour
     {
         //loads levels, all of the playable levels go by name "Level" + the number
         this.level = level;
-        if(level > _maxLevelAmount)
+        if (level > _maxLevelAmount)
         {
             _pauseCanvas.SetActive(false);
             SceneManager.LoadScene("FinishScene");
@@ -101,6 +103,11 @@ public class GameManagerScript : MonoBehaviour
         this.ball = FindObjectOfType<BallScript>();
         this.paddle = FindObjectOfType<PaddleScript>();
         this.bricks = FindObjectsOfType<BrickScript>();
+        this.livesScript = FindObjectOfType<ShowLivesScript>();
+        if(this.livesScript != null)
+        {
+            SetLives(this.lives) ;
+        }
         StopAllCoroutines();
     }
     public void Miss()
@@ -108,6 +115,7 @@ public class GameManagerScript : MonoBehaviour
         //is called when the ball gets in the DeadZone - makes the number of player lives go down and it either restarts the level or the game
         StopAllCoroutines(); //it's for the longPaddle power up routine, so the paddle doesn't get smaller after the restart
         this.lives--;
+        SetLives(this.lives);
         if (this.lives > 0)
         {
             ResetLevel();
@@ -188,5 +196,18 @@ public class GameManagerScript : MonoBehaviour
         paddle._speed *= _speedMultiplier;
         yield return new WaitForSeconds(_powerUpTime);
         paddle._speed /= _speedMultiplier;
+    }
+
+    private void SetLives(int lives)
+    {
+        Renderer[] livesColors = livesScript.GetComponentsInChildren<Renderer>();
+        for(int i = 0; i < 3; i++)
+        {
+            livesColors[i].material.color = livesScript._aliveColor;
+        }
+        for(int i = lives; i < 3; i++)
+        {
+            livesColors[i].material.color = livesScript._deadColor;
+        }
     }
 }
