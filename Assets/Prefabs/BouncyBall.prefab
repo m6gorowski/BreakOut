@@ -92,6 +92,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8355776483718579059, guid: c30351848a6de5f42a7204db2d5fec33, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 8355776483718579059, guid: c30351848a6de5f42a7204db2d5fec33, type: 3}
       propertyPath: m_Name
       value: BouncyBall
       objectReference: {fileID: 0}

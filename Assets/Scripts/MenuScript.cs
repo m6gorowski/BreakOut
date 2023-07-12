@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
+using static UnityEngine.ParticleSystem;
 
 public class MenuScript : MonoBehaviour
 {
@@ -16,7 +17,11 @@ public class MenuScript : MonoBehaviour
     [SerializeField]
     private Toggle _postProcessingToggle;
     [SerializeField]
+    private Toggle _trailsToggle;
+    [SerializeField]
     private GameObject _postProcessing;
+    [SerializeField]
+    private GameObject[] _ballsPrefabs;
     private void Start()
     {
         //Since we want to save the player's preferences, we have to store them inside PlayerPrefs
@@ -33,6 +38,10 @@ public class MenuScript : MonoBehaviour
         if (PlayerPrefs.HasKey("PostProcessing"))
         {
             _postProcessingToggle.isOn = IntToBool(PlayerPrefs.GetInt("PostProcessing"));
+        }
+        if (PlayerPrefs.HasKey("isTrails"))
+        {
+            _trailsToggle.isOn = IntToBool(PlayerPrefs.GetInt("isTrails"));
         }
     }
     public void QuitButton()
@@ -62,6 +71,15 @@ public class MenuScript : MonoBehaviour
     {
         _postProcessing.SetActive(isPostprocessing);
         PlayerPrefs.SetInt("PostProcessing", BoolToInt(isPostprocessing));
+    }
+
+    public void SetTrails(bool isTrails)
+    {
+        foreach(GameObject ball in _ballsPrefabs)
+        {
+            ball.GetComponent<TrailRenderer>().enabled = isTrails;
+            PlayerPrefs.SetInt("isTrails", BoolToInt(isTrails));
+        }
     }
 
     private bool IntToBool(int number)

@@ -51,4 +51,23 @@ public class PauseMenuScript : MonoBehaviour
         FindObjectOfType<GameManagerScript>().gameObject.SetActive(false);
         SceneManager.LoadScene("StartMenu");
     }
+    public void SetTrailsToActiveBalls(bool isTrails)
+    {
+        BouncyBallScript[] bouncyBalls = GameObject.FindObjectsOfType<BouncyBallScript>();
+        BallScript[] balls = GameObject.FindObjectsOfType<BallScript>();
+        ExtraBallScript[] extraBalls = GameObject.FindObjectsOfType<ExtraBallScript>();
+        foreach (BouncyBallScript bB in bouncyBalls)
+        {
+            bB.GetComponent<TrailRenderer>().enabled = isTrails;
+        }
+        foreach (BallScript b in balls)
+        {
+            b.GetComponent<TrailRenderer>().enabled = isTrails;
+        }
+        foreach (ExtraBallScript eB in extraBalls)
+        {
+            eB.GetComponent<TrailRenderer>().enabled = isTrails;
+        }
+
+    }
 }
